@@ -1,15 +1,14 @@
 {
   "name": "fond-of-spryker/shipments-rest-api",
-  "description": "Extend Shipments Rest Api Fix Netto Price",
+  "description": "Extend Shipments Rest Api",
   "license": "MIT",
   "authors": [
     {
-      "name": "József Geng",
-      "email": "gengjozsef86@gmail.com"
+      "name": "FOND OF"
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "spryker/shipments-rest-api": "^1.0.0"
   },
   "require-dev": {
