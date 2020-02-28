@@ -7,7 +7,7 @@ use Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer;
 use Spryker\Zed\ShipmentsRestApi\Business\ShipmentsRestApiFacade as SprykerShipmentsRestApiFacade;
 
 /**
- * @method \Spryker\Zed\ShipmentsRestApi\Business\ShipmentsRestApiBusinessFactory getFactory()
+ * @method \FondOfSpryker\Zed\ShipmentsRestApi\Business\ShipmentsRestApiBusinessFactory getFactory()
  */
 class ShipmentsRestApiFacade extends SprykerShipmentsRestApiFacade implements ShipmentsRestApiFacadeInterface
 {

@@ -13,7 +13,10 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class ShipmentItemQuoteMapperPlugin extends AbstractPlugin implements QuoteMapperPluginInterface
 {
     /**
-     * @inheritDoc
+     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function map(RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer, QuoteTransfer $quoteTransfer): QuoteTransfer
     {
