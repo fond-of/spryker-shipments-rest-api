@@ -26,6 +26,6 @@ class ShipmentsRestApiFacade extends SprykerShipmentsRestApiFacade implements Sh
         QuoteTransfer $quoteTransfer
     ): QuoteTransfer {
         return $this->getFactory()->createShipmentQuoteMapper()
-            ->mapShipmentToQuote($restCheckoutRequestAttributesTransfer, $quoteTransfer);
+            ->mapShipmentToQuoteItem($restCheckoutRequestAttributesTransfer, $quoteTransfer);
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
-namespace FondOfSpryker\Zed\ShipmentRestApi\Communication\Plugin;
+namespace FondOfSpryker\Zed\ShipmentsRestApi\Communication\Plugin\CheckoutRestApi;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer;
 use Spryker\Zed\CheckoutRestApiExtension\Dependency\Plugin\QuoteMapperPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
+/**
+ * @method \FondOfSpryker\Zed\ShipmentsRestApi\Business\ShipmentsRestApiFacadeInterface getFacade()
+ */
 class ShipmentItemQuoteMapperPlugin extends AbstractPlugin implements QuoteMapperPluginInterface
 {
     /**

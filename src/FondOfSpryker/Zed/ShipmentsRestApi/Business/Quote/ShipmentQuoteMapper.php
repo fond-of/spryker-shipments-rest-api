@@ -2,8 +2,10 @@
 
 namespace FondOfSpryker\Zed\ShipmentsRestApi\Business\Quote;
 
+use FondOfSpryker\Yves\Shipment\ShipmentConfig;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer;
+use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Spryker\Zed\ShipmentsRestApi\Business\Quote\ShipmentQuoteMapper as SprykerShipmentQuoteMapper;
 
@@ -26,11 +28,8 @@ class ShipmentQuoteMapper extends SprykerShipmentQuoteMapper implements Shipment
                 $shipment = new ShipmentTransfer();
             }
 
-            $shipmentMethodTransfer = $this->shipmentFacade->findAvailableMethodById($idShipmentMethod, $quoteTransfer);
-
-            if ($shipmentMethodTransfer === null) {
-                return $quoteTransfer;
-            }
+            $shipmentMethodTransfer = new ShipmentMethodTransfer();
+            $shipmentMethodTransfer->setIdShipmentMethod(ShipmentConfig::DEFAULT_MODULE_SHIPMENT_METHOD_ID);
 
             $shipment->setMethod($shipmentMethodTransfer)
                 ->setShipmentSelection((string)$idShipmentMethod)
@@ -39,22 +38,5 @@ class ShipmentQuoteMapper extends SprykerShipmentQuoteMapper implements Shipment
         }
 
         return $quoteTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ShipmentMethodTransfer $shipmentMethodTransfer
-     *
-     * @return \Generated\Shared\Transfer\ExpenseTransfer
-     */
-    protected function createShippingExpenseTransfer(ShipmentMethodTransfer $shipmentMethodTransfer): ExpenseTransfer
-    {
-        $shipmentExpenseTransfer = new ExpenseTransfer();
-        $shipmentExpenseTransfer->fromArray($shipmentMethodTransfer->toArray(), true);
-        $shipmentExpenseTransfer->setType(ShipmentConstants::SHIPMENT_EXPENSE_TYPE);
-        $shipmentExpenseTransfer->setUnitNetPrice($shipmentMethodTransfer->getStoreCurrencyPrice());
-        $shipmentExpenseTransfer->setUnitGrossPrice($shipmentMethodTransfer->getStoreCurrencyPrice());
-        $shipmentExpenseTransfer->setQuantity(1);
-
-        return $shipmentExpenseTransfer;
     }
 }
