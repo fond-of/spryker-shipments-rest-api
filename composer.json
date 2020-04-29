@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=7.1",
-    "spryker/shipments-rest-api": "^1.0.0"
+    "spryker/shipments-rest-api": "<1.2.0"
   },
   "require-dev": {
     "codeception/codeception": "^2.4",
