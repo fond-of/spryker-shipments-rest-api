@@ -3,26 +3,20 @@
 namespace FondOfSpryker\Zed\ShipmentsRestApi\Business\Quote;
 
 use Generated\Shared\Transfer\ExpenseTransfer;
-use Generated\Shared\Transfer\ShipmentMethodTransfer;
-use Spryker\Shared\Shipment\ShipmentConstants;
+use Generated\Shared\Transfer\ShipmentTransfer;
 use Spryker\Zed\ShipmentsRestApi\Business\Quote\ShipmentQuoteMapper as SprykerShipmentQuoteMapper;
 
 class ShipmentQuoteMapper extends SprykerShipmentQuoteMapper
 {
     /**
-     * @param \Generated\Shared\Transfer\ShipmentMethodTransfer $shipmentMethodTransfer
+     * @param \Generated\Shared\Transfer\ShipmentTransfer $shipmentTransfer
      *
      * @return \Generated\Shared\Transfer\ExpenseTransfer
      */
-    protected function createShippingExpenseTransfer(ShipmentMethodTransfer $shipmentMethodTransfer): ExpenseTransfer
+    protected function createShippingExpenseTransfer(ShipmentTransfer $shipmentTransfer): ExpenseTransfer
     {
-        $shipmentExpenseTransfer = new ExpenseTransfer();
-        $shipmentExpenseTransfer->fromArray($shipmentMethodTransfer->toArray(), true);
-        $shipmentExpenseTransfer->setType(ShipmentConstants::SHIPMENT_EXPENSE_TYPE);
-        $shipmentExpenseTransfer->setUnitNetPrice($shipmentMethodTransfer->getStoreCurrencyPrice());
-        $shipmentExpenseTransfer->setUnitGrossPrice($shipmentMethodTransfer->getStoreCurrencyPrice());
-        $shipmentExpenseTransfer->setQuantity(1);
+        $expenseTransfer = parent::createShippingExpenseTransfer($shipmentTransfer);
 
-        return $shipmentExpenseTransfer;
+        return $expenseTransfer->setUnitNetPrice($shipmentTransfer->getMethod()->getStoreCurrencyPrice());
     }
 }

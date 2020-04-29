@@ -9,7 +9,7 @@ use Spryker\Zed\ShipmentsRestApi\Business\ShipmentsRestApiBusinessFactory as Spr
 class ShipmentsRestApiBusinessFactory extends SprykerShipmentsRestApiBusinessFactory
 {
     /**
-     * @return \FondOfSpryker\Zed\ShipmentsRestApi\Business\ShipmentQuoteMapperInterface
+     * @return \Spryker\Zed\ShipmentsRestApi\Business\Quote\ShipmentQuoteMapperInterface
      */
     public function createShipmentQuoteMapper(): ShipmentQuoteMapperInterface
     {
