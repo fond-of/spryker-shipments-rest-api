@@ -2,21 +2,41 @@
 
 namespace FondOfSpryker\Zed\ShipmentsRestApi\Business\Quote;
 
-use Generated\Shared\Transfer\ExpenseTransfer;
+
+use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer;
+use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Spryker\Zed\ShipmentsRestApi\Business\Quote\ShipmentQuoteMapper as SprykerShipmentQuoteMapper;
 
-class ShipmentQuoteMapper extends SprykerShipmentQuoteMapper
+class ShipmentQuoteMapper extends SprykerShipmentQuoteMapper implements ShipmentQuoteMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ShipmentTransfer $shipmentTransfer
+     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ExpenseTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function createShippingExpenseTransfer(ShipmentTransfer $shipmentTransfer): ExpenseTransfer
-    {
-        $expenseTransfer = parent::createShippingExpenseTransfer($shipmentTransfer);
+    public function mapShipmentToQuoteItem(
+        RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer,
+        QuoteTransfer $quoteTransfer
+    ): QuoteTransfer {
+        $idShipmentMethod = $restCheckoutRequestAttributesTransfer->getShipment()->getIdShipmentMethod();
+        foreach ($quoteTransfer->getItems() as $item) {
+            $shipment = $item->getShipment();
+            if ($shipment === null) {
+                $shipment = new ShipmentTransfer();
+            }
 
-        return $expenseTransfer->setUnitNetPrice($shipmentTransfer->getMethod()->getStoreCurrencyPrice());
+            $shipmentMethodTransfer = new ShipmentMethodTransfer();
+            $shipmentMethodTransfer->setIdShipmentMethod(ShipmentConfig::DEFAULT_MODULE_SHIPMENT_METHOD_ID);
+
+            $shipment->setMethod($shipmentMethodTransfer)
+                ->setShipmentSelection((string)$idShipmentMethod)
+                ->setShippingAddress(clone $quoteTransfer->getBillingAddress());
+            $item->setShipment($shipment);
+        }
+
+        return $quoteTransfer;
     }
 }
