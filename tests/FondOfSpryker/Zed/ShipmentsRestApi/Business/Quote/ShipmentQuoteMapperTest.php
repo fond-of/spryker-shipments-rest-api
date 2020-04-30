@@ -72,7 +72,7 @@ class ShipmentQuoteMapperTest extends Unit
         $method = new ReflectionMethod(get_class($this->shipmentQuoteMapper), 'createShippingExpenseTransfer');
         $method->setAccessible(true);
 
-        $expenseTransfer = $method->invoke($this->shipmentQuoteMapper, $this->shipmentTransferMock);
+        $expenseTransfer = $method->invoke($this->shipmentQuoteMapper, $this->shipmentTransferMock, 'NET_MODE');
 
         $this->assertEquals(1990, $expenseTransfer->getUnitNetPrice());
     }
