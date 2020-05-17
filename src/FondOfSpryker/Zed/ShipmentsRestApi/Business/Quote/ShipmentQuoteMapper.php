@@ -13,7 +13,7 @@ use Spryker\Zed\ShipmentsRestApi\Dependency\Facade\ShipmentsRestApiToShipmentFac
 class ShipmentQuoteMapper implements ShipmentQuoteMapperInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\PriceModeShipmentsRestApi\Dependency\Facade\PriceModeShipmentsRestApiToShipmentFacadeInterface
+     * @var \Spryker\Zed\ShipmentsRestApi\Dependency\Facade\ShipmentsRestApiToShipmentFacadeInterface
      */
     protected $shipmentFacade;
 
