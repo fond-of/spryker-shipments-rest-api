@@ -1,6 +1,6 @@
 {
   "name": "fond-of-spryker/shipments-rest-api",
-  "description": "Extend Shipments Rest Api Fix Netto Price",
+  "description": "Extend Shipments Rest Api",
   "license": "MIT",
   "authors": [
     {
@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=7.1",
-    "spryker/shipments-rest-api": "<1.2.0"
+    "spryker/shipments-rest-api": "^1.2.0"
   },
   "require-dev": {
     "codeception/codeception": "^2.4",
@@ -29,7 +29,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FondOfSpryker\\": "tests/FondOfSpryker/"
+      "FondOfSpryker\\": "tests/FondOfSpryker/",
+      "Generated\\": "src/Generated/"
     }
   }
 }
